@@ -10,7 +10,7 @@ from openai import OpenAI
 
 from . import config
 
-_client = OpenAI(api_key=config.OPENAI_API_KEY)
+_client = OpenAI(api_key=config.OPENAI_API_KEY, max_retries=3, timeout=30.0)
 
 
 def llm(prompt: str, model: str, json_mode: bool = False) -> str:
