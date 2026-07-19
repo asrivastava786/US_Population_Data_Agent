@@ -27,6 +27,7 @@ class ChatResponse(BaseModel):
     session_id: str
     answer: str
     sql: str | None = None   # transparency: show the query that produced the answer
+    debug: str | None = None 
 
 
 @app.get("/")
@@ -52,4 +53,11 @@ def chat(req: ChatRequest):
     del history[:-20]  # cap memory per session
 
     shown_sql = result.get("sql") if result.get("route") == "answer" and not result.get("sql_feedback") else None
-    return ChatResponse(session_id=sid, answer=answer, sql=shown_sql)
+    return ChatResponse(
+        session_id=sid,
+        answer=answer,
+        sql=shown_sql,
+        debug=(f"feedback={result.get('sql_feedback')!r} "
+               f"attempts={result.get('sql_attempts')} "
+               f"last_sql={result.get('sql')!r}"),
+    )
