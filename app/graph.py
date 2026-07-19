@@ -12,6 +12,10 @@ from . import config
 from .prompts import ANSWER_PROMPT, ROUTER_PROMPT, SCHEMA_BLOCK, SCOPE, SQL_PROMPT
 from .services import grounded, llm, run_query
 from .validate_sql import validate_sql
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger("agent")
 
 
 class AgentState(TypedDict, total=False):
@@ -69,9 +73,14 @@ def generate_sql_node(state: AgentState) -> AgentState:
 
 def validate_node(state: AgentState) -> AgentState:
     result = validate_sql(state["sql"])
+
+    log.warning("VALIDATE FAIL attempt=%s err=%s sql=%r",
+            state.get("sql_attempts"), result.error, state.get("sql"))
+
     if result.ok:
         return {"sql": result.sql, "sql_feedback": ""}
     return {"sql_feedback": f"validation: {result.error}"}
+
 
 
 def execute_node(state: AgentState) -> AgentState:
@@ -79,6 +88,9 @@ def execute_node(state: AgentState) -> AgentState:
         rows = run_query(state["sql"])
         return {"rows": rows, "sql_feedback": "", "execution_failed": False}
     except Exception as e:  # snowflake errors carry useful messages
+        log.warning("EXECUTE FAIL attempt=%s err=%s sql=%r",
+            state.get("sql_attempts"), e, state.get("sql"))
+        
         return {"sql_feedback": f"execution: {e}", "execution_failed": True}
 
 
