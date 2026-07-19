@@ -63,6 +63,12 @@ def grounded(answer: str, rows: list[dict], question: str) -> tuple[bool, list[f
             expanded.add(round(v / 1_000_000, 1))   # "29.0 million"
         if abs(v) >= 1_000:
             expanded.add(round(v / 1_000, 1))       # "29,014" quoted as thousands
+
+    IGNORED = {2016.0, 2020.0, 5.0}
     offending = [n for n in _numbers_in(answer)
-                 if n not in expanded and n != 2016.0 and n != 2020.0 and n != 5.0]
+                 if n not in expanded
+                 and -n not in expanded
+                 and abs(n) not in IGNORED]
+    #offending = [n for n in _numbers_in(answer)
+     #            if n not in expanded and n != 2016.0 and n != 2020.0 and n != 5.0]
     return (len(offending) == 0, offending)
