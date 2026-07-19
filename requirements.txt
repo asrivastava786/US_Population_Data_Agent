@@ -1,0 +1,9 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+openai>=1.30
+langgraph>=0.2
+sqlglot>=25.0
+snowflake-connector-python>=3.10
+python-dotenv>=1.0
+pydantic>=2.7
+pytest>=8.0
