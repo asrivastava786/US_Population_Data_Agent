@@ -20,8 +20,8 @@ Agent: "Florida has a total population of 21,216,924."
 User: "How has it changed since 2010?"
 Agent: "I cannot answer trend questions across releases. ACS 5-year estimate periods (e.g., 2015–2019 vs 2016–2020) share 4 out of 5 sample years, and Census Block Group boundaries shifted in 2020..."
 
-User: "Top 5 counties in California by income"
-Agent: "Here are the top 5 California counties by median household income..."
+User: " Top 5 states by income ?"
+Agent: "The top 5 states by income, based on median household income, are Maryland ($87,688), New Jersey ($85,954), Massachusetts ($85,011), Hawaii ($83,922), and Connecticut ($80,224). If you are interested in mean household income, the top states are New Jersey ($117,855), Massachusetts ($115,952), Connecticut ($115,327), Maryland ($114,221), and Hawaii ($107,324). These figures are from the ACS 2016-2020 5-year estimates."
 ```
 
 ---
