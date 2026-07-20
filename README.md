@@ -2,7 +2,6 @@
 
 > A production-quality, deterministic chat agent answering natural-language questions about US demographic, economic, educational, and housing data—grounded directly in the **SafeGraph Open Census** dataset.
 
-[![Live Demo](https://us-population-data-agent.onrender.com/)
 
 * **Live Demo:** [(https://us-population-data-agent.onrender.com/))]*(Hosted on Render free tier—please allow ~60s for cold start on initial request).*
 
@@ -76,7 +75,7 @@ Because median figures (such as Median Household Income) cannot be mathematicall
 | :--- | :--- | :--- |
 | **Router** | Intent Classification | Classifies prompts against `SCOPE_MANIFEST`. Declines out-of-scope requests (e.g., time-series trends) with specific statistical reasons. |
 | **SQL Validator** | AST Security Boundary | Pure-function AST parser (`app/validate_sql.py`). Enforces single `SELECT` statements, forbids system functions/joins outside the 8-view allowlist, and guarantees `LIMIT` clauses. |
-| **Snowflake Role** | Defense in Depth | Database connection uses a read-only role constrained exclusively to `CENSUS_AGENT.CURATED`. |
+| **Snowflake Role** | Defense in Depth (designed; demo runs on trial-account role) | Production design: dedicated service user with SELECT-only on CENSUS_AGENT.CURATED (sql/03_service_role.sql provided, unapplied on the trial demo — see REFLECTION). |
 | **Groundedness Gate** | Fact Checking | Verifies that every numeric claim in the generated text is backed by returned database rows. One bounded regeneration attempt is granted on failure. |
 | **Graceful Fallback** | Error Handling | Second-stage SQL failures fall back to plain-language explanation with explicit raw row references. Empty query results are handled as valid responses rather than errors. |
 
