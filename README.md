@@ -12,13 +12,13 @@
 
 ```text
 User: "What is the population of Texas?"
-Agent: "According to the 2016–2020 ACS 5-Year Estimates, Texas has a total population of 28,635,310."
+Agent: "The population of Texas is 28,635,442. (ACS 2016-2020 5-year estimates)"
 
 User: "What about Florida?"
-Agent: "Florida has a total population of 21,216,924."
+Agent: "The population of Florida is 21,216,924. (ACS 2016-2020 5-year estimates)"
 
 User: "How has it changed since 2010?"
-Agent: "I cannot answer trend questions across releases. ACS 5-year estimate periods (e.g., 2015–2019 vs 2016–2020) share 4 out of 5 sample years, and Census Block Group boundaries shifted in 2020..."
+Agent: "Trends/change over time are not covered I can help with population, income, employment, poverty, education and housing at national, state or county level."
 
 User: " Top 5 states by income ?"
 Agent: "The top 5 states by income, based on median household income, are Maryland ($87,688), New Jersey ($85,954), Massachusetts ($85,011), Hawaii ($83,922), and Connecticut ($80,224). If you are interested in mean household income, the top states are New Jersey ($117,855), Massachusetts ($115,952), Connecticut ($115,327), Maryland ($114,221), and Hawaii ($107,324). These figures are from the ACS 2016-2020 5-year estimates."
